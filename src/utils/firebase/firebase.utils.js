@@ -16,18 +16,24 @@ const firebaseConfig = {
     appId: '1:687156207865:web:82acc0d9dcf32bbc93c228',
 }
 
+// connect to firebase project
 const firebaseApp = initializeApp(firebaseConfig)
 
-const provider = new GoogleAuthProvider()
-provider.setCustomParameters({
+const googleAuthProvider = new GoogleAuthProvider()
+googleAuthProvider.setCustomParameters({
     prompt: 'select_account',
 })
 
-// google auth
+// auth
 export const auth = getAuth()
-export const signInWithGooglePopup = () => signInWithPopup(auth, provider)
 
-// db
+// google auth
+export const signInWithGooglePopup = () =>
+    signInWithPopup(auth, googleAuthProvider)
+export const signInWithGoogleRedirect = () =>
+    signInWithRedirect(auth, googleAuthProvider)
+
+// firestore db
 export const db = getFirestore()
 
 // create user
