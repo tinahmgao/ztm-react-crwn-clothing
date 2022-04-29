@@ -1,5 +1,5 @@
 // package libraries
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 
 // components
 import FormInput from '../form-input/form-input.component'
@@ -12,6 +12,9 @@ import {
     signInAuthUserWithEmailAndPassword,
 } from '../../utils/firebase/firebase.utils'
 
+// Context
+import { UserContext } from '../../contexts/user.context'
+
 //styles
 import './sign-in-form.styles.scss'
 
@@ -23,6 +26,8 @@ const defaultFormValues = {
 const SignInForm = () => {
     const [formValues, setFormValues] = useState(defaultFormValues)
     const { email, password } = formValues
+
+    const { setCurrentUser } = useContext(UserContext)
 
     const resetFormValues = () => {
         setFormValues(defaultFormValues)
@@ -37,7 +42,11 @@ const SignInForm = () => {
         event.preventDefault()
 
         try {
-            await signInAuthUserWithEmailAndPassword(email, password)
+            const { user } = await signInAuthUserWithEmailAndPassword(
+                email,
+                password
+            )
+            setCurrentUser(user)
             resetFormValues()
         } catch (error) {
             switch (error.code) {
