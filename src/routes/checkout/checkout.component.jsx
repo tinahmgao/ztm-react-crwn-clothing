@@ -2,67 +2,43 @@ import { useContext } from 'react'
 
 import { CartContext } from '../../contexts/cart.context'
 
+import CheckoutItem from '../../components/checkout-item/checkout-item.component'
+
 import './checkout.styles.scss'
 
 const Checkout = () => {
     const {
         cartItems,
         totalAmount,
-        removeItemFromCart,
-        increaseItemToCart,
-        decreaseItemFromCart,
+        incrementItemToCart,
+        decrementItemFromCart,
     } = useContext(CartContext)
 
     return (
-        <div
-            style={{ display: 'flex', flexDirection: 'column', rowGap: '2rem' }}
-        >
+        <div className="checkout-container">
+            <div className="checkout-header">
+                <div className="header-block">
+                    <span>Product</span>
+                </div>
+                <div className="header-block">
+                    <span>Description</span>
+                </div>
+                <div className="header-block">
+                    <span>Quantity</span>
+                </div>
+                <div className="header-block">
+                    <span>Price</span>
+                </div>
+                <div className="header-block">
+                    <span>Remove</span>
+                </div>
+            </div>
+
             {cartItems.map((cartItem) => {
-                const { id, name, price, quantity } = cartItem
-                return (
-                    <div key={id} style={{ display: 'flex', gap: '2rem' }}>
-                        <p>{name}</p>
-                        <div style={{ display: 'flex', gap: '5px' }}>
-                            <button
-                                style={{
-                                    backgroundColor: 'white',
-                                    border: 'none',
-                                    fontWeight: 'bold',
-                                }}
-                                onClick={() => {
-                                    decreaseItemFromCart(cartItem)
-                                }}
-                            >
-                                {'<'}
-                            </button>
-                            <span>{quantity}</span>
-                            <button
-                                style={{
-                                    backgroundColor: 'white',
-                                    border: 'none',
-                                    fontWeight: 'bold',
-                                }}
-                                onClick={() => {
-                                    increaseItemToCart(cartItem)
-                                }}
-                            >
-                                {'>'}
-                            </button>
-                        </div>
-                        <p>{price}</p>
-                        <button
-                            style={{
-                                backgroundColor: 'white',
-                                border: 'none',
-                            }}
-                            onClick={() => removeItemFromCart(cartItem)}
-                        >
-                            X
-                        </button>
-                    </div>
-                )
+                return <CheckoutItem key={cartItem.id} cartItem={cartItem} />
             })}
-            <h2>TOTAL: ${totalAmount}</h2>
+
+            <span className="total">TOTAL: ${totalAmount}</span>
         </div>
     )
 }

@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from 'react'
 
-const increaseCartItem = (cartItems, productToIncrease) => {
+const incrementCartItem = (cartItems, productToIncrease) => {
     return cartItems.map((cartItem) =>
         cartItem.id === productToIncrease.id
             ? { ...cartItem, quantity: cartItem.quantity + 1 }
@@ -8,7 +8,7 @@ const increaseCartItem = (cartItems, productToIncrease) => {
     )
 }
 
-const decreaseCartItem = (cartItems, productToDecrease) => {
+const decrementCartItem = (cartItems, productToDecrease) => {
     if (productToDecrease.quantity > 1) {
         return cartItems.map((cartItem) =>
             cartItem.id === productToDecrease.id
@@ -27,7 +27,7 @@ const addCartItem = (cartItems, productToAdd) => {
     )
     //If found, increment quantity
     if (isItemExisting) {
-        return increaseCartItem(cartItems, productToAdd)
+        return incrementCartItem(cartItems, productToAdd)
     }
     //otherwise return new array with modified cartitems
     return [...cartItems, { ...productToAdd, quantity: 1 }]
@@ -70,12 +70,12 @@ export const CartProvider = ({ children }) => {
         setTotalAmount(newTotalAmount)
     }, [cartItems])
 
-    const increaseItemToCart = (productToIncrease) => {
-        setCartItems(increaseCartItem(cartItems, productToIncrease))
+    const incrementItemToCart = (productToIncrease) => {
+        setCartItems(incrementCartItem(cartItems, productToIncrease))
     }
 
-    const decreaseItemFromCart = (productToDecrease) => {
-        setCartItems(decreaseCartItem(cartItems, productToDecrease))
+    const decrementItemFromCart = (productToDecrease) => {
+        setCartItems(decrementCartItem(cartItems, productToDecrease))
     }
 
     const addItemToCart = (productToAdd) => {
@@ -94,8 +94,8 @@ export const CartProvider = ({ children }) => {
         setIsCartOpen,
         addItemToCart,
         removeItemFromCart,
-        increaseItemToCart,
-        decreaseItemFromCart,
+        incrementItemToCart,
+        decrementItemFromCart,
     }
 
     return <CartContext.Provider value={value}>{children}</CartContext.Provider>
