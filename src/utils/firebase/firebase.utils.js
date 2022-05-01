@@ -1,4 +1,3 @@
-import { async } from '@firebase/util'
 import { initializeApp } from 'firebase/app'
 import {
     getAuth,
@@ -18,7 +17,6 @@ import {
     collection,
     writeBatch,
     query,
-    getdocs,
     getDocs,
 } from 'firebase/firestore'
 
