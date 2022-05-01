@@ -12,10 +12,6 @@ const DirectoryItem = ({ category }) => {
 
     const onNavigateHandler = () => {
         const route = `/shop/${category.title}`
-        console.log(
-            '🌈 ~ file: directory-item.component.jsx ~ line 15 ~ onNavigateHandler ~ route',
-            route
-        )
         navigate(route)
     }
 

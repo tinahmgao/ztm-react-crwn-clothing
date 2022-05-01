@@ -7,7 +7,7 @@ export const CategoryContainer = styled.div`
     row-gap: 50px;
 `
 
-export const CategoryTitle = styled.div`
+export const CategoryTitle = styled.h2`
     text-align: center;
     margin-bottom: 50px;
 `

@@ -7,7 +7,7 @@ export const CategoryPreviewContainer = styled.div`
 `
 
 export const CategoryTitle = styled.h2`
-    font-size: 28px;
+    font-size: 2rem;
     margin-bottom: 25px;
     cursor: pointer;
 `
