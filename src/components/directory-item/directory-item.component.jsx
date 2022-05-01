@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import {
     BackgroundImage,
@@ -8,15 +8,24 @@ import {
 
 const DirectoryItem = ({ category }) => {
     const { imageUrl, title } = category
+    const navigate = useNavigate()
+
+    const onNavigateHandler = () => {
+        const route = `/shop/${category.title}`
+        console.log(
+            '🌈 ~ file: directory-item.component.jsx ~ line 15 ~ onNavigateHandler ~ route',
+            route
+        )
+        navigate(route)
+    }
+
     return (
-        <DirectoryItemContainer>
+        <DirectoryItemContainer onClick={onNavigateHandler}>
             <BackgroundImage imageUrl={imageUrl} />
 
             <Body>
-                <Link to={`/shop/${category.title}`}>
-                    <h2>{title}</h2>
-                    <p>Shop Now</p>
-                </Link>
+                <h2>{title}</h2>
+                <p>Shop Now</p>
             </Body>
         </DirectoryItemContainer>
     )
